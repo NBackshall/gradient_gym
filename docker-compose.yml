@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  gradient_gym:
+    build:
+      context: .
+      args:
+        uid: ${UID}
+        user: ${USER}
+    image: ${USER}/gradient_gym:latest
+    container_name: ${USER}_gradient_gym
+    devices:
+      - "/dev/dri:/dev/dri"
+    network_mode: host
+    privileged: true
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+      - .:/home/${USER}/repos/gradient_gym
+      - ${HOME}/.ssh:/home/${USER}/.ssh
+    stdin_open: true
+    tty: true
+
